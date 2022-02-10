@@ -5,17 +5,19 @@ using UnityEngine;
 public class Playercontroller : MonoBehaviour
 {
     private Rigidbody playerRb;
+    private Animator playerAnim;
     public float jumpForce = 10;
     public float gravityModifier;
     public bool isOnGround = true;
-    // Start is called before the first frame update
+    public bool gameOver= false;
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerAnim = GetComponent<Animator>();
         Physics.gravity *= gravityModifier;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
@@ -27,7 +29,16 @@ public class Playercontroller : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        isOnGround = true;
+        
+
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        } else if (collision.gameObject.CompareTag("Obstacles"))
+        {
+            Debug.Log("Game Over");
+            gameOver = true;
+        }
     }
 }
  
