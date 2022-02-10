@@ -12,7 +12,7 @@ public class Spawnmanager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playercontrollerScript = GameObject.Find("spawnmanager").GetComponent<Playercontroller>();
+        playercontrollerScript = GameObject.Find("player").GetComponent<Playercontroller>();
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
     }
 
